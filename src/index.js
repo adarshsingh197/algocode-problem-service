@@ -4,7 +4,8 @@ const bodyParser = require('body-parser')
 const {PORT} = require('./config/server.config')
 
 const app = express();
-const apirouter=require('./routes')
+const apirouter=require('./routes');
+const errorHandler = require('./utils/erroHandler');
 
 
 app.use(bodyParser.json());
@@ -17,6 +18,9 @@ app.get('/ping',(req,res)=>{
     return res.json({message:'Problem service is avaliable'})
 })
 
+//last middleware 
+app.use(errorHandler)
 app.listen(PORT,()=>{
-    console.log(`server started ${PORT}`)
+    console.log(`server started ${PORT}`);
+
 })
